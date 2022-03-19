@@ -26,8 +26,8 @@ sudo mkdir -p /data/local/ubuntu
 sudo tar -xzf ./ubuntu-base-21.10-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
 rm ./ubuntu-base-21.10-base-arm64.tar.gz
 
-#mount -o rw,remount /
-#mount -o rw,remount /system
+mount -o rw,remount /data
+mount -o rw,remount /system/bin
 
 echo "nameserver 8.8.8.8" > ./resolv.conf
 echo "nameserver 8.8.4.4" >> ./resolv.conf
@@ -61,6 +61,8 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 
 chmod 777 ../usr/bin/ubuntu
+sudo cp ../usr/bin/ubuntu /system/bin
+sudo chmod 777 /system/bin/ubuntu
 
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
