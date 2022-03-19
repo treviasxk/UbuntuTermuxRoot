@@ -12,13 +12,13 @@ banner (){
     echo " =============================================="
 }
 banner
-echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO! \e[0m"
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
 apt update
-apt install tsu
-apt install xz-utils
+apt install tsu -y
+apt install xz-utils -y
 apt install wget -y
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-arm64.tar.gz
-
+banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO! \e[0m"
 
 sudo mkdir -p /data/local/ubuntu 
@@ -29,9 +29,16 @@ rm ./ubuntu-base-21.10-base-arm64.tar.gz
 #mount -o rw,remount /system
 
 echo "nameserver 8.8.8.8" > ./resolv.conf
-echo "nameserver 8.8.4.4" >> /data/local/ubuntu/etc/resolv.conf
+echo "nameserver 8.8.4.4" >> ./resolv.conf
 sudo mv ./resolv.conf /data/local/ubuntu/etc/resolv.conf
 sudo chmod 644 /data/local/ubuntu/etc/resolv.conf
+
+echo "groupadd -g 3003 aid_inet" > ./finalizar
+echo "usermod -a -G aid_inet root" > ./finalizar
+echo "adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true" > ./finalizar
+echo "usermod -g 3003 _apt" > ./finalizar
+mv ./finalizar /data/local/ubuntu/root
+chmod +x /data/local/ubuntu/root/./finalizar 
 
 sudo mkdir -p /data/local/ubuntu/dev
 echo "127.0.0.1 localhost" > ./hosts
@@ -41,7 +48,7 @@ sudo mv ./hosts /data/local/ubuntu/etc/hosts
 cd
 echo "unset LD_PRELOAD" > ../usr/bin/ubuntu
 echo "clear" >> ../usr/bin/ubuntu
-echo "setenforce 0" >> ../usr/bin/ubuntu
+echo "sudo setenforce 0" >> ../usr/bin/ubuntu
 echo "export bin=/system/bin" >> ../usr/bin/ubuntu
 echo 'export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH' >> ../usr/bin/ubuntu
 echo "export TERM=linux" >> ../usr/bin/ubuntu
@@ -51,5 +58,8 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 
 chmod 777 ../usr/bin/ubuntu
-banner
 rm install
+
+banner
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
+echo "Use o comando `ubuntu` para iniciar o sistema."
