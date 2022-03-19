@@ -1,5 +1,5 @@
 # Ubuntu Termux Root
-Instale e execute o Ubuntu na raiz do seu smartphone com o termux. Utilize o comando `ubuntu` para poder iniciar o sistema e excute o comando `./finalizar` depois da instalação, para configurar o repositório do ubuntu.
+Instale o Ubuntu na raiz do seu smartphone com o termux. Para poder iniciar o sistema utilize o comando `ubuntu` e depois excute o comando `./finalizar` depois da instalação, para configurar automaticamente o repositório do ubuntu.
 ## Requisitos
 • Busybox
 
