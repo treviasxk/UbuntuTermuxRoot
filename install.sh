@@ -34,11 +34,13 @@ sudo mv ./resolv.conf /data/local/ubuntu/etc/resolv.conf
 sudo chmod 644 /data/local/ubuntu/etc/resolv.conf
 
 echo "groupadd -g 3003 aid_inet" > ./finalizar
-echo "usermod -a -G aid_inet root" > ./finalizar
-echo "adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true" > ./finalizar
-echo "usermod -g 3003 _apt" > ./finalizar
+echo "usermod -a -G aid_inet root" >> ./finalizar
+echo "adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true" >> ./finalizar
+echo "usermod -g 3003 _apt" >> ./finalizar
+echo 'echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m FINALIZADO! \e[0m"' >> ./finalizar
+echo 'rm ./finalizar' >> ./finalizar
 mv ./finalizar /data/local/ubuntu/root
-chmod +x /data/local/ubuntu/root/./finalizar 
+chmod +x /data/local/ubuntu/root/finalizar 
 
 sudo mkdir -p /data/local/ubuntu/dev
 echo "127.0.0.1 localhost" > ./hosts
