@@ -60,12 +60,12 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 cp ../usr/bin/ubuntu ./ubuntu
 echo "setenforce 0" >> ./ubuntu
 echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
-mv ./ubuntu /system/bin
-sudo chmod 777 /system/bin
+sudo mv ./ubuntu /system/bin
+sudo chmod +x /system/bin
 echo "sudo setenforce 0" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
-chmod 777 ../usr/bin/ubuntu
+chmod +x ../usr/bin/ubuntu
 
-banner
+#banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
 echo "Use o comando 'ubuntu' para iniciar o sistema."
