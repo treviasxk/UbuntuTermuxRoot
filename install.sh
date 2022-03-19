@@ -1,4 +1,5 @@
 #!/bin/bash
+rm install
 banner (){
     clear
     echo " ============= UBUNTU TERMUX ROOT ============="
@@ -19,7 +20,7 @@ apt install xz-utils -y
 apt install wget -y
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-arm64.tar.gz
 banner
-echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO! \e[0m"
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
 sudo mkdir -p /data/local/ubuntu 
 sudo tar -xzf ./ubuntu-base-21.10-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
@@ -37,10 +38,10 @@ echo "groupadd -g 3003 aid_inet" > ./finalizar
 echo "usermod -a -G aid_inet root" >> ./finalizar
 echo "adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true" >> ./finalizar
 echo "usermod -g 3003 _apt" >> ./finalizar
-echo 'echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m FINALIZADO! \e[0m"' >> ./finalizar
+echo 'echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALAÇÃO FINALIZADO! \e[0m"' >> ./finalizar
 echo 'rm ./finalizar' >> ./finalizar
-mv ./finalizar /data/local/ubuntu/root
-chmod +x /data/local/ubuntu/root/finalizar 
+sudo mv ./finalizar /data/local/ubuntu/root
+sudo chmod +x /data/local/ubuntu/root/finalizar 
 
 sudo mkdir -p /data/local/ubuntu/dev
 echo "127.0.0.1 localhost" > ./hosts
@@ -60,8 +61,7 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 
 chmod 777 ../usr/bin/ubuntu
-rm install
 
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
-echo "Use o comando `ubuntu` para iniciar o sistema."
+echo "Use o comando 'ubuntu' para iniciar o sistema."
