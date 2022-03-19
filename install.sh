@@ -1,14 +1,17 @@
 #!/bin/bash
-clear
+banner (){
+    clear
     echo " ============= UBUNTU TERMUX ROOT ============="
     echo -e "\e[1m\e[32m ______  ___  ___ _    _ .   _   ___   _  _ _ _"
     echo "   ||   |__/ |___  \  /  |  /_\  |__    \/  |/ "
     echo "   ||   |  \ |___   \/   | /   \  __|  _/\_ |\_"
     echo -e "\e[0m\e[39m ______________________________________________"
     echo " REDES SOCIAIS:                       treviasxk"
-    echo " VERSÃO:                              1.0.0.0"
+    echo " VERSÃO:                              1.0.1.1"
     echo " LICENÇA:                             GPL-3.0"
     echo " =============================================="
+}
+banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO! \e[0m"
 apt update
 apt install tsu
@@ -48,14 +51,5 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 
 chmod 777 ../usr/bin/ubuntu
-clear
-    echo " ============= UBUNTU TERMUX ROOT ============="
-    echo -e "\e[1m\e[32m ______  ___  ___ _    _ .   _   ___   _  _ _ _"
-    echo "   ||   |__/ |___  \  /  |  /_\  |__    \/  |/ "
-    echo "   ||   |  \ |___   \/   | /   \  __|  _/\_ |\_"
-    echo -e "\e[0m\e[39m ______________________________________________"
-    echo " REDES SOCIAIS:                       treviasxk"
-    echo " VERSÃO:                              1.0.0.0"
-    echo " LICENÇA:                             GPL-3.0"
-    echo " =============================================="
-echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
+banner
+rm install
