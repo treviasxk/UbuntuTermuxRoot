@@ -13,21 +13,23 @@ banner (){
     echo " =============================================="
 }
 banner
-echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
 apt update
 apt install tsu -y
 apt install xz-utils -y
 apt install wget -y
+banner
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-arm64.tar.gz
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
+sudo mount -o rw,remount /data
+sudo mount -o rw,remount /system/bin
+
 sudo mkdir -p /data/local/ubuntu 
 sudo tar -xzf ./ubuntu-base-21.10-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
 rm ./ubuntu-base-21.10-base-arm64.tar.gz
-
-mount -o rw,remount /data
-mount -o rw,remount /system/bin
 
 echo "nameserver 8.8.8.8" > ./resolv.conf
 echo "nameserver 8.8.4.4" >> ./resolv.conf
@@ -66,5 +68,6 @@ echo "sudo setenforce 0" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 chmod +x ../usr/bin/ubuntu
 
+banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
 echo "Use o comando 'ubuntu' para iniciar o sistema."
