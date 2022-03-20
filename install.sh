@@ -59,7 +59,7 @@ echo "127.0.0.1 localhost" > ./hosts
 echo "::1   localhost.localdomain" >> ./hosts
 sudo mv ./hosts /data/local/ubuntu/etc/hosts
 cd
-curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/scripts/ubuntu.sh -o ubuntu
+curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/scripts/ubuntu -o ubuntu
 chmod +x ./ubuntu
 cp ./ubuntu ../usr/bin/ubuntu
 sudo mv ./ubuntu /system/bin
