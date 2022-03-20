@@ -15,7 +15,8 @@ banner (){
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
 
-if ["$EUID" -ne 0] then
+if [ "$EUID" -ne 0 ]
+then
     apt update
     apt install curl -y
     apt install tsu -y
