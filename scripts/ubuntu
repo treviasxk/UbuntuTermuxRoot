@@ -14,7 +14,7 @@ suuninstall (){
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
     rm /system/bin/ubuntu
-    rm /data/data/com.termux/files/usr/bin
+    rm /data/data/com.termux/files/usr/bin/ubuntu
     rm -rf /data/local/ubuntu
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
     exit
@@ -27,7 +27,7 @@ uninstall (){
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
     sudo rm /system/bin/ubuntu
-    sudo rm /data/data/com.termux/files/usr/bin
+    sudo rm /data/data/com.termux/files/usr/bin/ubuntu
     sudo rm -rf /data/local/ubuntu
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
     exit
