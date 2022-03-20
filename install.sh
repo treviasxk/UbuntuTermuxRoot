@@ -12,15 +12,18 @@ banner (){
     echo " LICENÇA:                             GPL-3.0"
     echo " =============================================="
 }
+
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
 apt update
 apt install tsu -y
 apt install xz-utils -y
 apt install wget -y
+
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
 wget https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-arm64.tar.gz
+
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
@@ -62,12 +65,39 @@ echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 cp ../usr/bin/ubuntu ./ubuntu
 echo "setenforce 0" >> ./ubuntu
 echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
+echo "busybox mount -o remount,suid /data" >> ./ubuntu
+echo "busybox mountpoint -q /data/local/ubuntu/dev" >> ./ubuntu
+echo "busybox mount -o bind /dev /data/local/ubuntu/dev" >> ./ubuntu
+echo "busybox mount -t devpts devpts /data/local/ubuntu/dev/pts" >> ./ubuntu
+echo "busybox mount -t proc proc /data/local/ubuntu/proc" >> ./ubuntu
+echo "busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ./ubuntu
+echo "busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ./ubuntu
+echo "busybox chmod 666 /dev/null" >> ./ubuntu
+echo "busybox sysctl -w net.ipv4.ip_forward=1" >> ./ubuntu
 sudo mv ./ubuntu /system/bin
 sudo chmod +x /system/bin
 echo "sudo setenforce 0" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -o remount,suid /data" >> ../usr/bin/ubuntu
+echo "sudo busybox mountpoint -q /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -o bind /dev /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -t devpts devpts /data/local/ubuntu/dev/pts" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -t proc proc /data/local/ubuntu/proc" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ../usr/bin/ubuntu
+echo "sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ../usr/bin/ubuntu
+echo "sudo busybox chmod 666 /dev/null" >> ../usr/bin/ubuntu
+echo "sudo busybox sysctl -w net.ipv4.ip_forward=1" >> ../usr/bin/ubuntu
 chmod +x ../usr/bin/ubuntu
 
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
 echo "Use o comando 'ubuntu' para iniciar o sistema."
+
+
+
+
+
+
+
+
+
