@@ -73,6 +73,7 @@ echo "busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ./ubuntu
 echo "busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ./ubuntu
 echo "busybox chmod 666 /dev/null" >> ./ubuntu
 echo "busybox sysctl -w net.ipv4.ip_forward=1" >> ./ubuntu
+echo "clear" >> ./ubuntu
 echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
 sudo mv ./ubuntu /system/bin
 sudo chmod +x /system/bin
@@ -86,6 +87,7 @@ echo "sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ../usr/bin/ub
 echo "sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ../usr/bin/ubuntu
 echo "sudo busybox chmod 666 /dev/null" >> ../usr/bin/ubuntu
 echo "sudo busybox sysctl -w net.ipv4.ip_forward=1" >> ../usr/bin/ubuntu
+echo "clear" >> ../usr/bin/ubuntu
 echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 chmod +x ../usr/bin/ubuntu
 
