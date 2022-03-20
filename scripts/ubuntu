@@ -52,6 +52,7 @@ case $cmd in
   *)
     if [ "$cmd" -ne 0 ]
     then
+    else
       echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
     fi
   ;;
