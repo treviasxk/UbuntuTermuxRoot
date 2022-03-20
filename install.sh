@@ -58,14 +58,49 @@ then
     echo "127.0.0.1 localhost" > ./hosts
     echo "::1   localhost.localdomain" >> ./hosts
     sudo mv ./hosts /data/local/ubuntu/etc/hosts
-    cd
+
     curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/scripts/ubuntu -o ubuntu
     chmod +x ./ubuntu
-    cp ./ubuntu ../usr/bin/ubuntu
+    cp ./ubuntu /data/data/com.termux/files/usr/bin
     sudo mv ./ubuntu /system/bin
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
-    echo "Use o comando 'ubuntu' para iniciar o sistema."
 else
-    echo "Instalação root não disponível"
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
+    wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz -O ubuntu-base.tar.gz
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
+
+    mount -o rw,remount /data
+    mount -o rw,remount /system/bin
+
+    mkdir -p /data/local/ubuntu 
+    tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C /data/local/ubuntu
+    rm ./ubuntu-base.tar.gz
+
+    echo "nameserver 8.8.8.8" > /data/local/ubuntu/etc/resolv.conf                  # Adicionado DNS Primário
+    echo "nameserver 8.8.4.4" >> /data/local/ubuntu/etc/resolv.conf                 # Adicionado DNS Segundário
+    chmod 644 /data/local/ubuntu/etc/resolv.conf
+
+    echo "Set disable_coredump false" > /data/local/ubuntu/etc/sudo.conf             # Desativando Coredump para mais segurança
+
+    echo "groupadd -g 3003 aid_inet" > /data/local/ubuntu/root/finalizar 
+    echo "usermod -a -G aid_inet root" >> /data/local/ubuntu/root/finalizar 
+    echo "adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true" >> /data/local/ubuntu/root/finalizar 
+    echo "usermod -g 3003 _apt" >> /data/local/ubuntu/root/finalizar 
+    echo 'echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALAÇÃO FINALIZADO! \e[0m"' >> /data/local/ubuntu/root/finalizar 
+    echo 'rm ./finalizar' >> /data/local/ubuntu/root/finalizar 
+    chmod +x /data/local/ubuntu/root/finalizar 
+
+    mkdir -p /data/local/ubuntu/dev
+    echo "127.0.0.1 localhost" > /data/local/ubuntu/etc/hosts
+    echo "::1   localhost.localdomain" >> /data/local/ubuntu/etc/hosts
+
+    curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/scripts/ubuntu -o ubuntu
+    chmod +x ./ubuntu
+    cp ./ubuntu /data/data/com.termux/files/usr/bin
+    mv ./ubuntu /system/bin
 fi
+
+banner
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
+echo "Use o comando 'ubuntu' para iniciar o sistema."

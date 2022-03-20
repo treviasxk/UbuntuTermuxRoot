@@ -23,18 +23,18 @@ then
 
   clear
   sudo busybox chroot /data/local/ubuntu /bin/login -f root
-  else
-    setenforce 0
-    busybox mount -o remount,suid /data
-    busybox mountpoint -q /data/local/ubuntu/dev
-    busybox mount -o bind /dev /data/local/ubuntu/dev
-    busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
-    busybox mount -t proc proc /data/local/ubuntu/proc
-    busybox mount -t sysfs sysfs /data/local/ubuntu/sys
-    busybox mount -t tmpfs none /data/local/ubuntu/tmp
-    busybox chmod 666 /dev/null
-    busybox sysctl -w net.ipv4.ip_forward=1
+else
+  setenforce 0
+  busybox mount -o remount,suid /data
+  busybox mountpoint -q /data/local/ubuntu/dev
+  busybox mount -o bind /dev /data/local/ubuntu/dev
+  busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
+  busybox mount -t proc proc /data/local/ubuntu/proc
+  busybox mount -t sysfs sysfs /data/local/ubuntu/sys
+  busybox mount -t tmpfs none /data/local/ubuntu/tmp
+  busybox chmod 666 /dev/null
+  busybox sysctl -w net.ipv4.ip_forward=1
 
-    clear
-    busybox chroot /data/local/ubuntu /bin/login -f root
+  clear
+  busybox chroot /data/local/ubuntu /bin/login -f root
 fi
