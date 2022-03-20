@@ -24,9 +24,9 @@ unset LD_PRELOAD
 suuninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  rm /system/bin/ubuntu
-  rm /data/data/com.termux/files/usr/bin/ubuntu
-  rm -rf /data/local/ubuntu
+  rm /system/bin/ubuntu 2> /dev/null
+  rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
+  rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }
@@ -34,9 +34,9 @@ suuninstall (){
 uninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  sudo rm /system/bin/ubuntu
-  sudo rm /data/data/com.termux/files/usr/bin/ubuntu
-  sudo rm -rf /data/local/ubuntu
+  sudo rm /system/bin/ubuntu 2> /dev/null
+  sudo rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
+  sudo rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }
