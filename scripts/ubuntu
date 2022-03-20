@@ -1,5 +1,5 @@
 #!/system/bin/sh
-
+cmd=$1
 export bin=/system/bin
 export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export TERM=linux
@@ -8,22 +8,35 @@ export USER=root
 export LOGNAME=root
 unset LD_PRELOAD
 
-if [ "$EUID" -ne 0 ]
-then 
-  sudo setenforce 0
-  sudo busybox mount -o remount,suid /data
-  sudo busybox mountpoint -q /data/local/ubuntu/dev
-  sudo busybox mount -o bind /dev /data/local/ubuntu/dev
-  sudo busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
-  sudo busybox mount -t proc proc /data/local/ubuntu/proc
-  sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys
-  sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp
-  sudo busybox chmod 666 /dev/null
-  sudo busybox sysctl -w net.ipv4.ip_forward=1
+suuninstall (){
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  rm /system/bin/ubuntu
+  rm /data/data/com.termux/files/usr/bin
+  rm -rf /data/local/ubuntu
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+}
 
-  clear
-  sudo busybox chroot /data/local/ubuntu /bin/login -f root
-else
+uninstall (){
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  sudo rm /system/bin/ubuntu
+  sudo rm /data/data/com.termux/files/usr/bin
+  sudo rm -rf /data/local/ubuntu
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+}
+
+if [ "$EUID" -ne 0 ]
+then
+  case $cmd in
+    "-u")
+      suuninstall
+    ;;
+    "-uninstall")
+      suuninstall
+    ;;
+    *)
+      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
+    ;;
+  esac
   setenforce 0
   busybox mount -o remount,suid /data
   busybox mountpoint -q /data/local/ubuntu/dev
@@ -37,4 +50,29 @@ else
 
   clear
   busybox chroot /data/local/ubuntu /bin/login -f root
+else
+  case $cmd in
+    "-u")
+      uninstall
+    ;;
+    "-uninstall")
+      uninstall
+    ;;
+    *)
+      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
+    ;;
+  esac
+  sudo setenforce 0
+  sudo busybox mount -o remount,suid /data
+  sudo busybox mountpoint -q /data/local/ubuntu/dev
+  sudo busybox mount -o bind /dev /data/local/ubuntu/dev
+  sudo busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
+  sudo busybox mount -t proc proc /data/local/ubuntu/proc
+  sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys
+  sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp
+  sudo busybox chmod 666 /dev/null
+  sudo busybox sysctl -w net.ipv4.ip_forward=1
+
+  clear
+  sudo busybox chroot /data/local/ubuntu /bin/login -f root
 fi
