@@ -25,7 +25,7 @@ then
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
-    wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz
+    wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz -O ubuntu-base.tar.gz
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
@@ -33,8 +33,8 @@ then
     sudo mount -o rw,remount /system/bin
 
     sudo mkdir -p /data/local/ubuntu 
-    sudo tar -xzf ./ubuntu-base-16.04.6-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
-    rm ./ubuntu-base-16.04.6-base-arm64.tar.gz
+    sudo tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C /data/local/ubuntu
+    rm ./ubuntu-base.tar.gz
 
     echo "nameserver 8.8.8.8" > ./resolv.conf                       # Adicionado DNS Primário
     echo "nameserver 8.8.4.4" >> ./resolv.conf                      # Adicionado DNS Segundário
