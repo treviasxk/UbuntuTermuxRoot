@@ -42,6 +42,9 @@ uninstall (){
 }
 
 case $cmd in
+  "")
+    #vazio
+  ;;
   "-u")
     suuninstall
   ;;
@@ -49,10 +52,8 @@ case $cmd in
     suuninstall
   ;;
   *)
-    if [ "$cmd" -ne 0 ]
-    then
-      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
-    fi
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
+    exit
   ;;
 esac
 
