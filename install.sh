@@ -64,7 +64,6 @@ echo "export USER=root" >> ../usr/bin/ubuntu
 echo "export LOGNAME=root" >> ../usr/bin/ubuntu
 cp ../usr/bin/ubuntu ./ubuntu
 echo "setenforce 0" >> ./ubuntu
-echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
 echo "busybox mount -o remount,suid /data" >> ./ubuntu
 echo "busybox mountpoint -q /data/local/ubuntu/dev" >> ./ubuntu
 echo "busybox mount -o bind /dev /data/local/ubuntu/dev" >> ./ubuntu
@@ -74,10 +73,10 @@ echo "busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ./ubuntu
 echo "busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ./ubuntu
 echo "busybox chmod 666 /dev/null" >> ./ubuntu
 echo "busybox sysctl -w net.ipv4.ip_forward=1" >> ./ubuntu
+echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
 sudo mv ./ubuntu /system/bin
 sudo chmod +x /system/bin
 echo "sudo setenforce 0" >> ../usr/bin/ubuntu
-echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 echo "sudo busybox mount -o remount,suid /data" >> ../usr/bin/ubuntu
 echo "sudo busybox mountpoint -q /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
 echo "sudo busybox mount -o bind /dev /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
@@ -87,6 +86,7 @@ echo "sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ../usr/bin/ub
 echo "sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ../usr/bin/ubuntu
 echo "sudo busybox chmod 666 /dev/null" >> ../usr/bin/ubuntu
 echo "sudo busybox sysctl -w net.ipv4.ip_forward=1" >> ../usr/bin/ubuntu
+echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
 chmod +x ../usr/bin/ubuntu
 
 banner
