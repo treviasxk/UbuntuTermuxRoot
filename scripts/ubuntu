@@ -12,7 +12,6 @@ banner (){
     echo " LICENÇA:                             GPL-3.0"
     echo " =============================================="
 }
-banner
 
 export bin=/system/bin
 export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH
