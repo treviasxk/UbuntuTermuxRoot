@@ -23,29 +23,23 @@ export LOGNAME=root
 unset LD_PRELOAD
 
 suuninstall (){
-  if [ "$cmd" -ne 0 ]
-  then
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-    rm /system/bin/ubuntu
-    rm /data/data/com.termux/files/usr/bin/ubuntu
-    rm -rf /data/local/ubuntu
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
-    exit
-  fi
+  banner
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  rm /system/bin/ubuntu
+  rm /data/data/com.termux/files/usr/bin/ubuntu
+  rm -rf /data/local/ubuntu
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+  exit
 }
 
 uninstall (){
-  if [ "$cmd" -ne 0 ]
-  then
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-    sudo rm /system/bin/ubuntu
-    sudo rm /data/data/com.termux/files/usr/bin/ubuntu
-    sudo rm -rf /data/local/ubuntu
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
-    exit
-  fi
+  banner
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  sudo rm /system/bin/ubuntu
+  sudo rm /data/data/com.termux/files/usr/bin/ubuntu
+  sudo rm -rf /data/local/ubuntu
+  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+  exit
 }
 
 case $cmd in
@@ -56,7 +50,10 @@ case $cmd in
     suuninstall
   ;;
   *)
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
+    if [ "$cmd" -ne 0 ]
+    then
+      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
+    fi
   ;;
 esac
 
