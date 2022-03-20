@@ -1,5 +1,19 @@
 #!/system/bin/sh
 cmd=$1
+banner (){
+    clear
+    echo " ============= UBUNTU TERMUX ROOT ============="
+    echo -e "\e[1m\e[32m ______  ___  ___ _    _ .   _   ___   _  _ _ _"
+    echo "   ||   |__/ |___  \  /  |  /_\  |__    \/  |/ "
+    echo "   ||   |  \ |___   \/   | /   \  __|  _/\_ |\_"
+    echo -e "\e[0m\e[39m ______________________________________________"
+    echo " REDES SOCIAIS:                       treviasxk"
+    echo " VERSÃO:                              1.0.1.0"
+    echo " LICENÇA:                             GPL-3.0"
+    echo " =============================================="
+}
+banner
+
 export bin=/system/bin
 export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export TERM=linux
