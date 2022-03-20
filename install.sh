@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/system/bin/sh
 rm install
 banner (){
     clear
@@ -15,15 +15,17 @@ banner (){
 
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
+
+if [ "$EUID" -ne 0 ] then
 apt update
+apt install curl -y
 apt install tsu -y
 apt install xz-utils -y
 apt install wget -y
 
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
-wget https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-arm64.tar.gz
-
+wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
@@ -31,13 +33,17 @@ sudo mount -o rw,remount /data
 sudo mount -o rw,remount /system/bin
 
 sudo mkdir -p /data/local/ubuntu 
-sudo tar -xzf ./ubuntu-base-21.10-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
-rm ./ubuntu-base-21.10-base-arm64.tar.gz
+sudo tar -xzf ./ubuntu-base-16.04.6-base-arm64.tar.gz --exclude='dev' -C /data/local/ubuntu
+rm ./ubuntu-base-16.04.6-base-arm64.tar.gz
 
-echo "nameserver 8.8.8.8" > ./resolv.conf
-echo "nameserver 8.8.4.4" >> ./resolv.conf
+echo "nameserver 8.8.8.8" > ./resolv.conf                       # Adicionado DNS Primário
+echo "nameserver 8.8.4.4" >> ./resolv.conf                      # Adicionado DNS Segundário
 sudo mv ./resolv.conf /data/local/ubuntu/etc/resolv.conf
 sudo chmod 644 /data/local/ubuntu/etc/resolv.conf
+
+
+echo "Set disable_coredump false" > ./sudo.conf                 # Desativando Coredump para mais segurança
+sudo mv ./sudo.conf /data/local/ubuntu/etc/sudo.conf
 
 echo "groupadd -g 3003 aid_inet" > ./finalizar
 echo "usermod -a -G aid_inet root" >> ./finalizar
@@ -52,54 +58,14 @@ sudo mkdir -p /data/local/ubuntu/dev
 echo "127.0.0.1 localhost" > ./hosts
 echo "::1   localhost.localdomain" >> ./hosts
 sudo mv ./hosts /data/local/ubuntu/etc/hosts
-
 cd
-echo "unset LD_PRELOAD" > ../usr/bin/ubuntu
-echo "clear" >> ../usr/bin/ubuntu
-echo "export bin=/system/bin" >> ../usr/bin/ubuntu
-echo 'export PATH=/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:$PATH' >> ../usr/bin/ubuntu
-echo "export TERM=linux" >> ../usr/bin/ubuntu
-echo "export HOME=/root" >> ../usr/bin/ubuntu
-echo "export USER=root" >> ../usr/bin/ubuntu
-echo "export LOGNAME=root" >> ../usr/bin/ubuntu
-cp ../usr/bin/ubuntu ./ubuntu
-echo "setenforce 0" >> ./ubuntu
-echo "busybox mount -o remount,suid /data" >> ./ubuntu
-echo "busybox mountpoint -q /data/local/ubuntu/dev" >> ./ubuntu
-echo "busybox mount -o bind /dev /data/local/ubuntu/dev" >> ./ubuntu
-echo "busybox mount -t devpts devpts /data/local/ubuntu/dev/pts" >> ./ubuntu
-echo "busybox mount -t proc proc /data/local/ubuntu/proc" >> ./ubuntu
-echo "busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ./ubuntu
-echo "busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ./ubuntu
-echo "busybox chmod 666 /dev/null" >> ./ubuntu
-echo "busybox sysctl -w net.ipv4.ip_forward=1" >> ./ubuntu
-echo "clear" >> ./ubuntu
-echo "busybox chroot /data/local/ubuntu /bin/login -f root" >> ./ubuntu
+curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/scripts/ubuntu.sh -o ubuntu
+chmod +x ./ubuntu
+cp ./ubuntu ../usr/bin/ubuntu
 sudo mv ./ubuntu /system/bin
-sudo chmod +x /system/bin
-echo "sudo setenforce 0" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -o remount,suid /data" >> ../usr/bin/ubuntu
-echo "sudo busybox mountpoint -q /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -o bind /dev /data/local/ubuntu/dev" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -t devpts devpts /data/local/ubuntu/dev/pts" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -t proc proc /data/local/ubuntu/proc" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys" >> ../usr/bin/ubuntu
-echo "sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp" >> ../usr/bin/ubuntu
-echo "sudo busybox chmod 666 /dev/null" >> ../usr/bin/ubuntu
-echo "sudo busybox sysctl -w net.ipv4.ip_forward=1" >> ../usr/bin/ubuntu
-echo "clear" >> ../usr/bin/ubuntu
-echo "sudo busybox chroot /data/local/ubuntu /bin/login -f root" >> ../usr/bin/ubuntu
-chmod +x ../usr/bin/ubuntu
-
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"
 echo "Use o comando 'ubuntu' para iniciar o sistema."
-
-
-
-
-
-
-
-
-
+else
+    echo "Instalação root não disponível"
+fi
