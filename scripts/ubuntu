@@ -9,70 +9,70 @@ export LOGNAME=root
 unset LD_PRELOAD
 
 suuninstall (){
-  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  rm /system/bin/ubuntu
-  rm /data/data/com.termux/files/usr/bin
-  rm -rf /data/local/ubuntu
-  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+  if [ "$cmd" -ne 0 ]
+  then
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+    rm /system/bin/ubuntu
+    rm /data/data/com.termux/files/usr/bin
+    rm -rf /data/local/ubuntu
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+    exit
+  fi
 }
 
 uninstall (){
-  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  sudo rm /system/bin/ubuntu
-  sudo rm /data/data/com.termux/files/usr/bin
-  sudo rm -rf /data/local/ubuntu
-  echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+  if [ "$cmd" -ne 0 ]
+  then
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+    sudo rm /system/bin/ubuntu
+    sudo rm /data/data/com.termux/files/usr/bin
+    sudo rm -rf /data/local/ubuntu
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
+    exit
+  fi
 }
+
+case $cmd in
+  "-u")
+    suuninstall
+  ;;
+  "--uninstall")
+    suuninstall
+  ;;
+  *)
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
+  ;;
+esac
 
 if [ "$EUID" -ne 0 ]
 then
-  case $cmd in
-    "-u")
-      suuninstall
-    ;;
-    "-uninstall")
-      suuninstall
-    ;;
-    *)
-      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
-    ;;
-  esac
   setenforce 0
-  busybox mount -o remount,suid /data
-  busybox mountpoint -q /data/local/ubuntu/dev
-  busybox mount -o bind /dev /data/local/ubuntu/dev
-  busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
-  busybox mount -t proc proc /data/local/ubuntu/proc
-  busybox mount -t sysfs sysfs /data/local/ubuntu/sys
-  busybox mount -t tmpfs none /data/local/ubuntu/tmp
-  busybox chmod 666 /dev/null
-  busybox sysctl -w net.ipv4.ip_forward=1
+  mount -o remount,suid /data
+  mountpoint -q /data/local/ubuntu/dev
+  mount -o bind /dev /data/local/ubuntu/dev
+  mount -t devpts devpts /data/local/ubuntu/dev/pts
+  mount -t proc proc /data/local/ubuntu/proc
+  mount -t sysfs sysfs /data/local/ubuntu/sys
+  mount -t tmpfs none /data/local/ubuntu/tmp
+  chmod 666 /dev/null
+  sysctl -w net.ipv4.ip_forward=1
 
   clear
-  busybox chroot /data/local/ubuntu /bin/login -f root
+  chroot /data/local/ubuntu /bin/login -f root
 else
-  case $cmd in
-    "-u")
-      uninstall
-    ;;
-    "-uninstall")
-      uninstall
-    ;;
-    *)
-      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m Comando válido! \e[0m"
-    ;;
-  esac
   sudo setenforce 0
-  sudo busybox mount -o remount,suid /data
-  sudo busybox mountpoint -q /data/local/ubuntu/dev
-  sudo busybox mount -o bind /dev /data/local/ubuntu/dev
-  sudo busybox mount -t devpts devpts /data/local/ubuntu/dev/pts
-  sudo busybox mount -t proc proc /data/local/ubuntu/proc
-  sudo busybox mount -t sysfs sysfs /data/local/ubuntu/sys
-  sudo busybox mount -t tmpfs none /data/local/ubuntu/tmp
-  sudo busybox chmod 666 /dev/null
-  sudo busybox sysctl -w net.ipv4.ip_forward=1
+  sudo mount -o remount,suid /data
+  sudo mountpoint -q /data/local/ubuntu/dev
+  sudo mount -o bind /dev /data/local/ubuntu/dev
+  sudo mount -t devpts devpts /data/local/ubuntu/dev/pts
+  sudo mount -t proc proc /data/local/ubuntu/proc
+  sudo mount -t sysfs sysfs /data/local/ubuntu/sys
+  sudo mount -t tmpfs none /data/local/ubuntu/tmp
+  sudo chmod 666 /dev/null
+  sudo sysctl -w net.ipv4.ip_forward=1
 
   clear
-  sudo busybox chroot /data/local/ubuntu /bin/login -f root
+  sudo chroot /data/local/ubuntu /bin/login -f root
 fi

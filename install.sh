@@ -15,6 +15,23 @@ banner (){
 banner
 echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
 
+download (){
+    case `dpkg --print-architecture` in
+		aarch64)
+			archurl="arm64" ;;
+		arm)
+			archurl="armhf" ;;
+		amd64)
+			archurl="amd64" ;;
+		x86_64)
+			archurl="amd64" ;;
+		*)
+			echo "Arquitetura desconhecida"; exit 1;;
+	esac
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO ubuntu-base-21.10-$archurl... \e[0m"
+    wget "https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-$archurl.tar.gz" -O ubuntu-base.tar.gz
+}
 if [ "$EUID" -ne 0 ]
 then
     apt update
@@ -23,9 +40,8 @@ then
     apt install xz-utils -y
     apt install wget -y
 
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
-    wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz -O ubuntu-base.tar.gz
+    download
+
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
@@ -64,9 +80,8 @@ then
     cp ./ubuntu /data/data/com.termux/files/usr/bin
     sudo mv ./ubuntu /system/bin
 else
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO... \e[0m"
-    wget https://cdimage.ubuntu.com/ubuntu-base/releases/16.04.4/release/ubuntu-base-16.04.6-base-arm64.tar.gz -O ubuntu-base.tar.gz
+    download
+    
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
