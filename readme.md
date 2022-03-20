@@ -14,7 +14,7 @@ curl -s -L https://raw.githubusercontent.com/treviasxk/UbuntuTermuxRoot/master/i
 ## Desinstalação
 Primeiro pare todos os serviços e saia do ubuntu com o comando `exit` em seguida fecha o termux, depois insira o comando shell abaixo no Termux para poder fazer a desinstalação. Caso não consiga, reinicia o smartphone e inicie o código novamente.
 ```bash
-ubuntu --uninstall
+ubuntu --uninstall ou ubuntu -u
 ```
 ### Problema no apt upgrade
 Caso não consiga fazer o `apt upgrade` esse problema acontece devido o ubuntu não reconhecer a versão do kernel corretamente, use `apt-mark hold libc6` para manobrar esse problema.
