@@ -8,7 +8,7 @@ banner (){
     echo "   ||   |  \ |___   \/   | /   \  __|  _/\_ |\_"
     echo -e "\e[0m\e[39m ______________________________________________"
     echo " REDES SOCIAIS:                       treviasxk"
-    echo " VERSÃO:                              1.0.1.0"
+    echo " VERSÃO:                              1.0.2.0"
     echo " LICENÇA:                             GPL-3.0"
     echo " =============================================="
 }
@@ -27,7 +27,7 @@ suuninstall (){
   mount -o rw,remount /data
   mount -o rw,remount /system/bin
   rm /system/bin/ubuntu 2> /dev/null
-  rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
+  rm $PREFIX/bin/bin/ubuntu 2> /dev/null
   rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
@@ -39,7 +39,7 @@ uninstall (){
   sudo mount -o rw,remount /data
   sudo mount -o rw,remount /system/bin
   sudo rm /system/bin/ubuntu 2> /dev/null
-  sudo rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
+  sudo rm $PREFIX/bin/ubuntu 2> /dev/null
   sudo rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit

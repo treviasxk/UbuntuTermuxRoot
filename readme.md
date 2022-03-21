@@ -1,5 +1,5 @@
 # Ubuntu Termux Root
-Instale o Ubuntu Base 21.10 na raiz do seu smartphone com o termux. Para poder iniciar o sistema utilize o comando `ubuntu` e depois excute o comando `./finalizar` depois da instalação, para configurar automaticamente o repositório do ubuntu.
+Instale o Ubuntu Base 21.10 na raiz do seu smartphone com o termux. Para poder iniciar o sistema utilize o comando `ubuntu`.
 ## Requisitos
 • Busybox
 
