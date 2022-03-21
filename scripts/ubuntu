@@ -24,6 +24,8 @@ unset LD_PRELOAD
 suuninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  mount -o rw,remount /data
+  mount -o rw,remount /system/bin
   rm /system/bin/ubuntu 2> /dev/null
   rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
   rm -rf /data/local/ubuntu 2> /dev/null
@@ -34,6 +36,8 @@ suuninstall (){
 uninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
+  sudo mount -o rw,remount /data
+  sudo mount -o rw,remount /system/bin
   sudo rm /system/bin/ubuntu 2> /dev/null
   sudo rm /data/data/com.termux/files/usr/bin/ubuntu 2> /dev/null
   sudo rm -rf /data/local/ubuntu 2> /dev/null
