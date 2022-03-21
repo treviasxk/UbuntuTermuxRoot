@@ -18,27 +18,27 @@ if [ "$EUID" -ne 0 ]
 then
     sudo mount -o rw,remount /data
     sudo mount -o rw,remount /system/bin
-    
+
     rm /system/bin/ubuntu 2> /dev/null
     rm $PREFIX/bin/ubuntu 2> /dev/null
     rm -rf /data/local/ubuntu 2> /dev/null
 
-    apt update 2> /dev/null
+    apt update -qq
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO GIT... \e[0m"
-    apt install git -y 2> /dev/null
+    apt install git -y -qq
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO CURL... \e[0m"
-    apt install curl -y 2> /dev/null
+    apt install curl -y -qq
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO TSU... \e[0m"
-    apt install tsu -y 2> /dev/null
+    apt install tsu -y -qq
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO XZ-UTILS... \e[0m"
-    apt install xz-utils -y 2> /dev/null
+    apt install xz-utils -y -qq
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO WGET... \e[0m"
-    apt install wget -y 2> /dev/null
+    apt install wget -y -qq
 
     case `dpkg --print-architecture` in
 		aarch64)
