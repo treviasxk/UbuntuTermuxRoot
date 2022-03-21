@@ -16,6 +16,13 @@ echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 
 if [ "$EUID" -ne 0 ]
 then
+    sudo mount -o rw,remount /data
+    sudo mount -o rw,remount /system/bin
+    
+    rm /system/bin/ubuntu 2> /dev/null
+    rm $PREFIX/bin/ubuntu 2> /dev/null
+    rm -rf /data/local/ubuntu 2> /dev/null
+
     apt update 2> /dev/null
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO GIT... \e[0m"
@@ -58,9 +65,6 @@ then
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
-
-    sudo mount -o rw,remount /data
-    sudo mount -o rw,remount /system/bin
 
     sudo mkdir -p /data/local/ubuntu                                    #Criando pasta para instalação do ubuntu
     sudo mkdir -p /data/local/ubuntu/dev                                #Criando pasta para recursos adicionais do ubuntu.
