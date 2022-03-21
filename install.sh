@@ -55,7 +55,8 @@ then
     sudo tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C /data/local/ubuntu
     
     #Alterando permissões de arquivos
-    chmod +x ./scripts/ubuntu
+    chmod 777 ./scripts/ubuntu
+    chmod 664 ./scripts/resolv.conf
 
     #Configurações necessário para o funcionamento do Ubuntu
     sudo mv ./scripts/resolv.conf /data/local/ubuntu/etc                #Adicionando DNS
