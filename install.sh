@@ -12,16 +12,26 @@ banner (){
     echo " =============================================="
 }
 banner
-echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m ATUALIZANDO... \e[0m"
+echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 
 if [ "$EUID" -ne 0 ]
 then
-    apt update
-    apt install git -y
-    apt install curl -y
-    apt install tsu -y
-    apt install xz-utils -y
-    apt install wget -y
+    apt update 2> /dev/null
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO GIT... \e[0m"
+    apt install git -y 2> /dev/null
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO CURL... \e[0m"
+    apt install curl -y 2> /dev/null
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO TSU... \e[0m"
+    apt install tsu -y 2> /dev/null
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO XZ-UTILS... \e[0m"
+    apt install xz-utils -y 2> /dev/null
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO WGET... \e[0m"
+    apt install wget -y 2> /dev/null
 
     case `dpkg --print-architecture` in
 		aarch64)
@@ -36,11 +46,14 @@ then
 			echo "Arquitetura desconhecida"; exit 1;;
 	esac
 
+    banner
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO DATA... \e[0m"
+
     git clone https://github.com/treviasxk/UbuntuTermuxRoot
     cd UbuntuTermuxRoot
 
     banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO ubuntu-base-21.10-$archurl... \e[0m"
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO UBUNTU BASE 21.10... \e[0m"
     wget "https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-$archurl.tar.gz" -O ubuntu-base.tar.gz
 
     banner
