@@ -56,7 +56,13 @@ then
     
     #Alterando permissões de arquivos
     chmod 777 ./scripts/ubuntu
-    chmod 664 ./scripts/resolv.conf
+    chmod 644 ./scripts/passwd
+    chmod 644 ./scripts/resolv.conf
+    chmod 644 ./scripts/sudo.conf
+    chmod 644 ./scripts/hosts
+    chmod 644 ./scripts/group
+    chmod 640 ./scripts/shadow
+    chmod 640 ./scripts/gshadow
 
     #Configurações necessário para o funcionamento do Ubuntu
     sudo mv ./scripts/resolv.conf /data/local/ubuntu/etc                #Adicionando DNS
