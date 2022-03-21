@@ -28,20 +28,10 @@ then
     sudo rm -rf /data/local/ubuntu 2> /dev/null
 
     apt update -qq
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO GIT... \e[0m"
     apt install git -y -qq
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO CURL... \e[0m"
     apt install curl -y -qq
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO TSU... \e[0m"
     apt install tsu -y -qq
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO XZ-UTILS... \e[0m"
     apt install xz-utils -y -qq
-    banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO WGET... \e[0m"
     apt install wget -y -qq
 
     case `dpkg --print-architecture` in
@@ -79,7 +69,6 @@ then
     chmod 777 ./scripts/ubuntu
     chmod 644 ./scripts/passwd
     chmod 644 ./scripts/resolv.conf
-    chmod 644 ./scripts/sudo.conf
     chmod 644 ./scripts/hosts
     chmod 644 ./scripts/group
     chmod 640 ./scripts/shadow
@@ -87,7 +76,6 @@ then
 
     #Configurações necessário para o funcionamento do Ubuntu
     sudo mv ./scripts/resolv.conf /data/local/ubuntu/etc                #Adicionando DNS
-    sudo mv ./scripts/sudo.conf /data/local/ubuntu/etc                  #Desativando Coredump para mais segurança
     sudo mv ./scripts/hosts /data/local/ubuntu/etc                      #Adicionando domínios locais
     sudo mv ./scripts/group /data/local/ubuntu/etc                      #Permissões dos grupos
     sudo mv ./scripts/passwd /data/local/ubuntu/etc                     #Permissões do usuário
