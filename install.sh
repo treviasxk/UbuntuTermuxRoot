@@ -19,9 +19,9 @@ then
     sudo mount -o rw,remount /data
     sudo mount -o rw,remount /system/bin
 
-    rm /system/bin/ubuntu 2> /dev/null
     rm $PREFIX/bin/ubuntu 2> /dev/null
-    rm -rf /data/local/ubuntu 2> /dev/null
+    sudo rm /system/bin/ubuntu 2> /dev/null
+    sudo rm -rf /data/local/ubuntu 2> /dev/null
 
     apt update -qq
     banner
