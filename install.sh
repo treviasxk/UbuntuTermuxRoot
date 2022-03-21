@@ -70,7 +70,7 @@ then
 
     #Limpando instalação
     rm -rf ../UbuntuTermuxRoot
-    rm install
+    rm ../install
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALADO COM SUCESSO! \e[0m"

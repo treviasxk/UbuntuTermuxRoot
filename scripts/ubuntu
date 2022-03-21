@@ -27,7 +27,7 @@ suuninstall (){
   mount -o rw,remount /data
   mount -o rw,remount /system/bin
   rm /system/bin/ubuntu 2> /dev/null
-  rm $PREFIX/bin/bin/ubuntu 2> /dev/null
+  rm $PREFIX/bin/ubuntu 2> /dev/null
   rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
@@ -39,30 +39,30 @@ uninstall (){
   sudo mount -o rw,remount /data
   sudo mount -o rw,remount /system/bin
   sudo rm /system/bin/ubuntu 2> /dev/null
-  sudo rm $PREFIX/bin/ubuntu 2> /dev/null
+  rm $PREFIX/bin/ubuntu 2> /dev/null
   sudo rm -rf /data/local/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }
 
-case $cmd in
-  "")
-    #vazio
-  ;;
-  "-u")
-    suuninstall
-  ;;
-  "--uninstall")
-    suuninstall
-  ;;
-  *)
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
-    exit
-  ;;
-esac
 
 if [ "$EUID" -ne 0 ]
 then
+  case $cmd in
+    "")
+      #vazio
+    ;;
+    "-u")
+      suuninstall
+    ;;
+    "--uninstall")
+      suuninstall
+    ;;
+    *)
+      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
+      exit
+    ;;
+  esac
   setenforce 0
   mount -o remount,suid /data
   mountpoint -q /data/local/ubuntu/dev
@@ -77,6 +77,21 @@ then
   clear
   chroot /data/local/ubuntu /bin/login -f root
 else
+  case $cmd in
+    "")
+      #vazio
+    ;;
+    "-u")
+      uninstall
+    ;;
+    "--uninstall")
+      uninstall
+    ;;
+    *)
+      echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m COMANDO INVÁLIDO! \e[0m"
+      exit
+    ;;
+  esac
   sudo setenforce 0
   sudo mount -o remount,suid /data
   sudo mountpoint -q /data/local/ubuntu/dev
