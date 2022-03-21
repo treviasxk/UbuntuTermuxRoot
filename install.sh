@@ -1,4 +1,8 @@
 #!/system/bin/sh
+# Software desenvolvido por Trevias Xk
+# Redes sociais:       treviasxk
+# Github:              https://github.com/treviasxk
+
 banner (){
     clear
     echo " ============= UBUNTU TERMUX ROOT ============="
