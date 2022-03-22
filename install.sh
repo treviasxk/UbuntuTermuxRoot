@@ -3,6 +3,8 @@
 # Redes sociais:       treviasxk
 # Github:              https://github.com/treviasxk
 
+localbuild="/data/local/ubuntu"
+
 banner (){
     clear
     echo " ============= UBUNTU TERMUX ROOT ============="
@@ -20,12 +22,15 @@ echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 
 if [ "$EUID" -ne 0 ]
 then
-    sudo mount -o rw,remount /data
-    sudo mount -o rw,remount /system/bin
 
-    rm $PREFIX/bin/ubuntu 2> /dev/null
-    sudo rm /system/bin/ubuntu 2> /dev/null
-    sudo rm -rf /data/local/ubuntu 2> /dev/null
+    sudo mount -o rw,remount /data 2> /dev/null
+    sudo mount -o rw,remount /system/bin 2> /dev/null
+
+    if [ -d "$localbuild" ] && {
+        rm $PREFIX/bin/ubuntu 2> /dev/null
+        sudo rm /system/bin/ubuntu 2> /dev/null
+        sudo rm -rf $localbuild 2> /dev/null
+	}
 
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
@@ -61,10 +66,10 @@ then
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
-    sudo mkdir -p /data/local/ubuntu                                    #Criando pasta para instalação do ubuntu
-    sudo mkdir -p /data/local/ubuntu/dev                                #Criando pasta para recursos adicionais do ubuntu.
+    sudo mkdir -p $localbuild                                    #Criando pasta para instalação do ubuntu
+    sudo mkdir -p $localbuild/dev                                #Criando pasta para recursos adicionais do ubuntu.
 
-    sudo tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C /data/local/ubuntu
+    sudo tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C $localbuild
     
     #Alterando permissões de arquivos
     chmod 777 ./scripts/ubuntu
@@ -76,12 +81,12 @@ then
     chmod 640 ./scripts/gshadow
 
     #Configurações necessário para o funcionamento do Ubuntu
-    sudo mv ./scripts/resolv.conf /data/local/ubuntu/etc                #Adicionando DNS
-    sudo mv ./scripts/hosts /data/local/ubuntu/etc                      #Adicionando domínios locais
-    sudo mv ./scripts/group /data/local/ubuntu/etc                      #Permissões dos grupos
-    sudo mv ./scripts/passwd /data/local/ubuntu/etc                     #Permissões do usuário
-    sudo mv ./scripts/shadow /data/local/ubuntu/etc                     #Segurança das informações da conta
-    sudo mv ./scripts/gshadow /data/local/ubuntu/etc                    #Segurança das informações dos grupos
+    sudo mv ./scripts/resolv.conf $localbuild/etc                #Adicionando DNS
+    sudo mv ./scripts/hosts $localbuild/etc                      #Adicionando domínios locais
+    sudo mv ./scripts/group $localbuild/etc                      #Permissões dos grupos
+    sudo mv ./scripts/passwd $localbuild/etc                     #Permissões do usuário
+    sudo mv ./scripts/shadow $localbuild/etc                     #Segurança das informações da conta
+    sudo mv ./scripts/gshadow $localbuild/etc                    #Segurança das informações dos grupos
     cp ./scripts/ubuntu $PREFIX/bin                                     #Atalho para iniciar o ubuntu
     sudo mv ./ubuntu /system/bin                                        #Atalho para iniciar o ubuntu
 
