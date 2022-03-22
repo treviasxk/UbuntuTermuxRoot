@@ -26,11 +26,11 @@ then
     sudo mount -o rw,remount /data 2> /dev/null
     sudo mount -o rw,remount /system/bin 2> /dev/null
 
-    if [ -d "$localbuild" ] && {
+    if [ -d "$localbuild" ] then
         rm $PREFIX/bin/ubuntu 2> /dev/null
         sudo rm /system/bin/ubuntu 2> /dev/null
         sudo rm -rf $localbuild 2> /dev/null
-	}
+	fi
 
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
