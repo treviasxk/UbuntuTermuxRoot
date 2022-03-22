@@ -80,6 +80,7 @@ then
     chmod 644 ./scripts/group
     chmod 640 ./scripts/shadow
     chmod 640 ./scripts/gshadow
+    chmod 755 ./scripts/adduser
 
     #Configurações necessário para o funcionamento do Ubuntu
     sudo mv ./scripts/resolv.conf $localbuild/etc                #Adicionando DNS
@@ -88,8 +89,9 @@ then
     sudo mv ./scripts/passwd $localbuild/etc                     #Permissões do usuário
     sudo mv ./scripts/shadow $localbuild/etc                     #Segurança das informações da conta
     sudo mv ./scripts/gshadow $localbuild/etc                    #Segurança das informações dos grupos
-    cp ./scripts/ubuntu $PREFIX/bin                                     #Atalho para iniciar o ubuntu
-    sudo mv ./ubuntu /system/bin                                        #Atalho para iniciar o ubuntu
+    sudo mv ./scripts/adduser $localbuild/sbin                   #Script personalizado, para corrigir internet
+    cp ./scripts/ubuntu $PREFIX/bin                              #Atalho para iniciar o ubuntu
+    sudo mv ./ubuntu /system/bin                                 #Atalho para iniciar o ubuntu
 
     #Limpando instalação
     rm -rf ../UbuntuTermuxRoot
