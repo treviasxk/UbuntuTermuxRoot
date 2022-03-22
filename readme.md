@@ -21,4 +21,9 @@ Ou
 ubuntu --uninstall
 ```
 ### Problema no apt upgrade
-Caso não consiga fazer o `apt upgrade` esse problema acontece devido o ubuntu não reconhecer a versão do kernel corretamente, use `apt-mark hold libc6` para manobrar esse problema.
+Caso não consiga fazer o `apt upgrade`, esse problema acontece devido o ubuntu não reconhecer a versão do kernel corretamente no libc6, use `apt-mark hold libc6` para "manobrar" esse problema.
+### Sem internet ao criar um novo usuário
+Se for criar uma conta no `adduser` ao finalizar, lembre-se de adicionar a nova conta de usuário para o grupo aid_inet, o kernel do smartphone só concede internet via root se o usuário estiver nesse grupo.
+```bash
+usermod -a -G aid_inet SeuUserAqui
+```

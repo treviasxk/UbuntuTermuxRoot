@@ -27,6 +27,7 @@ then
     sudo rm /system/bin/ubuntu 2> /dev/null
     sudo rm -rf /data/local/ubuntu 2> /dev/null
 
+    #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
     apt install git -y -qq
     apt install curl -y -qq
