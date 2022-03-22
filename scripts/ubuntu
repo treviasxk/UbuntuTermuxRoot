@@ -29,11 +29,14 @@ banner (){
 suuninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  mount -o rw,remount /data 2> /dev/null
+  if [ -d "$localbuild" ]
+  then
+    mount -o rw,remount /data 2> /dev/null
+    rm -rf $localbuild 2> /dev/null
+  fi
   mount -o rw,remount /system/bin 2> /dev/null
   rm /system/bin/ubuntu 2> /dev/null
   rm $PREFIX/bin/ubuntu 2> /dev/null
-  rm -rf $localbuild 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }
@@ -41,11 +44,14 @@ suuninstall (){
 uninstall (){
   banner
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALANDO UBUNTU... \e[0m"
-  sudo mount -o rw,remount /data 2> /dev/null
-  sudo mount -o rw,remount /system/bin 2> /dev/null
-  sudo rm /system/bin/ubuntu 2> /dev/null
-  rm $PREFIX/bin/ubuntu 2> /dev/null
-  sudo rm -rf $localbuild 2> /dev/null
+  if [ -d "$localbuild" ]
+  then
+    sudo mount -o rw,remount /data 2> /dev/null
+    sudo rm -rf $localbuild 2> /dev/null
+  fi
+    sudo mount -o rw,remount /system/bin 2> /dev/null
+    sudo rm /system/bin/ubuntu 2> /dev/null
+    rm $PREFIX/bin/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }
@@ -69,13 +75,13 @@ then
     ;;
   esac
   setenforce 0
-  mount -o remount,suid /data
-  mountpoint -q $localbuild/dev
-  mount -o bind /dev $localbuild/dev
-  mount -t devpts devpts $localbuild/dev/pts
-  mount -t proc proc $localbuild/proc
-  mount -t sysfs sysfs $localbuild/sys
-  mount -t tmpfs none $localbuild/tmp
+  mount -o remount,suid /data 2> /dev/null
+  mountpoint -q $localbuild/dev 2> /dev/null
+  mount -o bind /dev $localbuild/dev 2> /dev/null
+  mount -t devpts devpts $localbuild/dev/pts 2> /dev/null
+  mount -t proc proc $localbuild/proc 2> /dev/null
+  mount -t sysfs sysfs $localbuild/sys 2> /dev/null
+  mount -t tmpfs none $localbuild/tmp 2> /dev/null
   chmod 666 /dev/null
   #sysctl -w net.ipv4.ip_forward=1
 
@@ -98,13 +104,13 @@ else
     ;;
   esac
   sudo setenforce 0
-  sudo mount -o remount,suid /data
-  sudo mountpoint -q $localbuild/dev
-  sudo mount -o bind /dev $localbuild/dev
-  sudo mount -t devpts devpts $localbuild/dev/pts
-  sudo mount -t proc proc $localbuild/proc
-  sudo mount -t sysfs sysfs $localbuild/sys
-  sudo mount -t tmpfs none $localbuild/tmp
+  sudo mount -o remount,suid /data 2> /dev/null
+  sudo mountpoint -q $localbuild/dev 2> /dev/null
+  sudo mount -o bind /dev $localbuild/dev 2> /dev/null
+  sudo mount -t devpts devpts $localbuild/dev/pts 2> /dev/null
+  sudo mount -t proc proc $localbuild/proc 2> /dev/null
+  sudo mount -t sysfs sysfs $localbuild/sys 2> /dev/null
+  sudo mount -t tmpfs none $localbuild/tmp 2> /dev/null
   sudo chmod 666 /dev/null
   #sudo sysctl -w net.ipv4.ip_forward=1
 
