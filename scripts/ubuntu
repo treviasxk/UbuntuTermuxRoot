@@ -32,13 +32,9 @@ suuninstall (){
   if [ -d "$localbuild" ]
   then
     mount -o rw,remount /data 2> /dev/null
-    #mount -o rw,remount -t auto /data 2> /dev/null
     rm -rf $localbuild 2> /dev/null
+    rm $PREFIX/bin/ubuntu 2> /dev/null
   fi
-  mount -o rw,remount /system/bin 2> /dev/null
-  #mount -o rw,remount -t auto /system/bin 2> /dev/null
-  rm /system/bin/ubuntu 2> /dev/null
-  rm $PREFIX/bin/ubuntu 2> /dev/null
   echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m DESINSTALAÇÃO CONCLUÍDO! \e[0m"
   exit
 }

@@ -22,14 +22,7 @@ echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 
 if [ "$EUID" -ne 0 ]
 then
-
-    #Para caso os comandos seja toolbox
-    #sudo mount -o rw,remount /system/bin 2> /dev/null
-    #sudo mount -o rw,remount /data 2> /dev/null
-
-    #Para caso os comandos seja toybox
-    sudo mount -o rw,remount -t auto /system/bin 2> /dev/null
-    sudo mount -o rw,remount -t auto /data 2> /dev/null
+    sudo mount -o rw,remount /data 2> /dev/null
 
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
@@ -94,8 +87,7 @@ then
     sudo mv ./scripts/shadow $localbuild/etc                     #Segurança das informações da conta
     sudo mv ./scripts/gshadow $localbuild/etc                    #Segurança das informações dos grupos
     sudo mv ./scripts/adduser $localbuild/sbin                   #Script personalizado, para corrigir internet
-    cp ./scripts/ubuntu $PREFIX/bin                              #Atalho para iniciar o ubuntu
-    sudo mv ./ubuntu /system/bin                                 #Atalho para iniciar o ubuntu
+    mv ./scripts/ubuntu $PREFIX/bin                              #Atalho para iniciar o ubuntu
 
     #Limpando instalação
     rm -rf ../UbuntuTermuxRoot
