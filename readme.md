@@ -4,8 +4,6 @@ Instale o Ubuntu Base 21.10 na raiz do seu smartphone com o termux. Para poder i
 ## AVISO!
 Instale por conta própria, não serei responsavel por qualquer dano que possa acontecer em seu aparelho.
 ## Requisitos
-• Busybox
-
 • Magisk
 
 • Arquitetura arm64, armhf, amd64 ou x86_64
