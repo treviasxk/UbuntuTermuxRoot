@@ -23,9 +23,15 @@ echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 if [ "$EUID" -ne 0 ]
 then
 
-    sudo mount -o rw,remount /data 2> /dev/null
+    #Para caso os comandos seja toolbox
     sudo mount -o rw,remount /system/bin 2> /dev/null
+    sudo mount -o rw,remount /data 2> /dev/null
 
+    #Para caso os comandos seja toybox
+    sudo mount -o rw,remount -t auto /system/bin 2> /dev/null
+    sudo mount -o rw,remount -t auto /data 2> /dev/null
+
+    #Verificar se diretório da instalação existe e remover versão antiga.
     if [ -d "$localbuild" ]
     then
         rm $PREFIX/bin/ubuntu 2> /dev/null
@@ -41,6 +47,7 @@ then
     apt install xz-utils -y -qq
     apt install wget -y -qq
 
+    #Verificando arquitetura do dispositivo
     case `dpkg --print-architecture` in
 		aarch64)
 			archurl="arm64" ;;
@@ -57,19 +64,24 @@ then
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO DATA... \e[0m"
 
+    #Baixando arquivos obrigatório para um bom funcionamento
     git clone https://github.com/treviasxk/UbuntuTermuxRoot
     cd UbuntuTermuxRoot
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO UBUNTU BASE 21.10... \e[0m"
+
+    #Baixando o Ubuntu Base 21.10 de acordo com a arquitetura
     wget "https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-$archurl.tar.gz" -O ubuntu-base.tar.gz
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
 
-    sudo mkdir -p $localbuild                                    #Criando pasta para instalação do ubuntu
-    sudo mkdir -p $localbuild/dev                                #Criando pasta para recursos adicionais do ubuntu.
+    #Criando pastas no sistema
+    sudo mkdir -p $localbuild                                    #Pasta para instalação do ubuntu
+    sudo mkdir -p $localbuild/dev                                #Pasta para recursos adicionais do ubuntu
 
+    #Extraindo sistema ubuntu na pasta criado no sistema
     sudo tar -xzf ./ubuntu-base.tar.gz --exclude='dev' -C $localbuild
     
     #Alterando permissões de arquivos
