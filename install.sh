@@ -22,8 +22,6 @@ echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m PREPARANDO... \e[0m"
 
 if [ "$EUID" -ne 0 ]
 then
-    sudo mount -o rw,remount /data 2> /dev/null
-
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
     apt install tsu -y -qq
@@ -31,6 +29,8 @@ then
     apt install curl -y -qq
     apt install xz-utils -y -qq
     apt install wget -y -qq
+
+    #sudo mount -o rw,remount /data 2> /dev/null
 
     #Verificando arquitetura do dispositivo
     case `dpkg --print-architecture` in
