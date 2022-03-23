@@ -43,7 +43,7 @@ then
 		x86_64)
 			archurl="amd64" ;;
 		*)
-			echo "Arquitetura desconhecida"; exit 1;;
+		echo "Arquitetura desconhecida"; exit 1;;
 	esac
 
     banner
