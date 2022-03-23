@@ -13,7 +13,7 @@ export LOGNAME=root
 unset LD_PRELOAD
 localbuild="/data/local/ubuntu"
 
-banner (msg){
+banner (){
     clear
     echo " ============= UBUNTU TERMUX ROOT ============="
     echo -e "\e[1m\e[32m ______  ___  ___ _    _ .   _   ___   _  _ _ _"

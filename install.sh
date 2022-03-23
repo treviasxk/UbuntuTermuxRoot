@@ -24,20 +24,12 @@ if [ "$EUID" -ne 0 ]
 then
 
     #Para caso os comandos seja toolbox
-    sudo mount -o rw,remount /system/bin 2> /dev/null
-    sudo mount -o rw,remount /data 2> /dev/null
+    #sudo mount -o rw,remount /system/bin 2> /dev/null
+    #sudo mount -o rw,remount /data 2> /dev/null
 
     #Para caso os comandos seja toybox
     sudo mount -o rw,remount -t auto /system/bin 2> /dev/null
     sudo mount -o rw,remount -t auto /data 2> /dev/null
-
-    #Verificar se diretório da instalação existe e remover versão antiga.
-    if [ -d "$localbuild" ]
-    then
-        rm $PREFIX/bin/ubuntu 2> /dev/null
-        sudo rm /system/bin/ubuntu 2> /dev/null
-        sudo rm -rf $localbuild 2> /dev/null
-	fi
 
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
