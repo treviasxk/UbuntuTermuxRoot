@@ -26,7 +26,6 @@ then
     apt update -qq
     apt install tsu -y -qq
     apt install git -y -qq
-    apt install curl -y -qq
     apt install xz-utils -y -qq
     apt install wget -y -qq
 
