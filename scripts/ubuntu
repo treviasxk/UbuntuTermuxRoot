@@ -11,7 +11,7 @@ export HOME=/root
 export USER=root
 export LOGNAME=root
 unset LD_PRELOAD
-localbuild="/data/local/ubuntu"
+localbuild="/data/local/tmp/ubuntu"
 
 banner (){
     clear

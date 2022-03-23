@@ -3,7 +3,7 @@
 # Redes sociais:       treviasxk
 # Github:              https://github.com/treviasxk
 
-localbuild="/data/local/ubuntu"
+localbuild="/data/local/tmp/ubuntu"
 
 banner (){
     clear
@@ -26,6 +26,7 @@ then
 
     #Ferramentas necessários no Termux para instalar o ubuntu
     apt update -qq
+    apt install sudo -y -qq
     apt install git -y -qq
     apt install curl -y -qq
     apt install tsu -y -qq
