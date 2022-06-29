@@ -14,7 +14,7 @@ banner (){
     echo -e "\e[0m\e[39m ______________________________________________"
     echo " REDES SOCIAIS:                       treviasxk"
     echo " VERSÃO:                              1.0.4.0"
-    echo " LICENÇA:                             GPL-4.0"
+    echo " LICENÇA:                             GPL-3.0"
     echo " =============================================="
 }
 banner
