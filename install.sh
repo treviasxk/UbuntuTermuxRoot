@@ -13,8 +13,8 @@ banner (){
     echo "   ||   |  \ |___   \/   | /   \  __|  _/\_ |\_"
     echo -e "\e[0m\e[39m ______________________________________________"
     echo " REDES SOCIAIS:                       treviasxk"
-    echo " VERSÃO:                              1.0.3.0"
-    echo " LICENÇA:                             GPL-3.0"
+    echo " VERSÃO:                              1.0.4.0"
+    echo " LICENÇA:                             GPL-4.0"
     echo " =============================================="
 }
 banner
@@ -53,10 +53,10 @@ then
     cd UbuntuTermuxRoot
 
     banner
-    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO UBUNTU BASE 21.10... \e[0m"
+    echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m BAIXANDO UBUNTU BASE 22.04... \e[0m"
 
-    #Baixando o Ubuntu Base 21.10 de acordo com a arquitetura
-    wget "https://cdimage.ubuntu.com/ubuntu-base/releases/21.10/release/ubuntu-base-21.10-base-$archurl.tar.gz" -O ubuntu-base.tar.gz
+    #Baixando o Ubuntu Base 22.04 de acordo com a arquitetura
+    wget "https://cdimage.ubuntu.com/ubuntu-base/releases/22.04/release/ubuntu-base-22.04-base-$archurl.tar.gz" -O ubuntu-base.tar.gz
 
     banner
     echo -e "\e[30;48;5;82m STATUS \e[40;38;5;82m INSTALANDO... \e[0m"
